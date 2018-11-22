@@ -4,29 +4,23 @@ extern crate futures;
 extern crate reqwest;
 extern crate tokio;
 extern crate serde;
-#[macro_use] extern crate serde_derive;
+// #[macro_use] extern crate serde_derive;
 extern crate serde_json;
 
 // use futures::Future;
 use serde_json::Value;
 use reqwest::{Client, Response};
 use std::str::FromStr;
-use std::collections::LinkedList;
+// use std::collections::LinkedList;
+// use std::vec::Vec;
+use serde::export::Vec;
 
-// use std::collections::HashMap;
-#[derive(Deserialize, Debug)]
-struct Slideshow {
-    title: String,
-    author: String,
+fn get_most_recent_price(prices: &mut Vec<f32>) -> f32 {
+    let length = prices.len();
+    return prices[length - 1]; // get earliest price stock 
 }
-
-#[derive(Deserialize, Debug)]
-struct SlideshowContainer {
-    slideshow: Slideshow,
-}
-
-
-fn fetch() -> std::result::Result<std::collections::LinkedList<f32>, reqwest::Error> {
+// use std::collections::HashMap
+fn fetch() -> std::result::Result<Vec<f32>, reqwest::Error> {
     let client = Client::new();
 
     let json = |mut res : Response | {
@@ -40,14 +34,21 @@ fn fetch() -> std::result::Result<std::collections::LinkedList<f32>, reqwest::Er
          request1.map(|res1|{
             let obj = res1.as_object().unwrap();
             let meta = obj["Time Series (1min)"].as_object().unwrap();
-            let mut stocks = LinkedList::new();
+            let mut stocks: Vec<f32> = Vec::new();
+            let start = meta.len() -90;
+            let mut index = 0;
             for x in meta {
+                if index >= start {
                 let cur_stock = x.1.as_object().unwrap();
                 let open = cur_stock["1. open"].as_str().unwrap();
                 let x = f32::from_str(open).unwrap();
-                println!("{:?}", x);
-                stocks.push_back(x);
+               println!("{:?}", x);
+                stocks.push(x);
+                index = index + 1;
+                }
+                index = index + 1;
             }
+            println!("{:?}", get_most_recent_price(&mut stocks));
             println!("{:?}", stocks.len());
             return stocks;
         })
