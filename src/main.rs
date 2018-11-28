@@ -12,15 +12,63 @@ use serde_json::Value;
 use reqwest::{Client, Response};
 use std::str::FromStr;
 use std::env;
+use std::{thread, time};
 
 // use std::collections::LinkedList;
 // use std::vec::Vec;
 use serde::export::Vec;
 
-fn get_most_recent_price(prices: &mut Vec<f32>) -> f32 {
-    let length = prices.len();
-    return prices[length - 1]; // get earliest price stock 
+fn get_most_recent_price(equity: &str ) -> f32 {
+    let res = fetch(equity);
+    match res {
+    Ok(v) => {
+    let mut tmp_prices = v; 
+    let length = tmp_prices.len();
+     println!("{}", "This is the most recent price");
+    println!("{:?}", tmp_prices[length - 1]);
+    return tmp_prices[length - 1]; // get earliest price stock 
+    },
+    Err(_e) =>  return 0.00,
 }
+}
+
+//called when a new stock price is available, max every minute
+//returns true for buy signal false otherwise
+fn k_means(prices: &mut Vec<f32>) -> bool{
+    let mut thirty_sum: f32 = 0.0;
+    let mut x = 89;
+    while x >= 60{
+        println!("price at:{} is {}", x, thirty_sum);
+        thirty_sum += prices[x];
+        x = x - 1;
+    }
+    
+    let mut nintey_sum: f32 = 0.0;
+    let mut k = 0;
+    while k < 90 {
+        nintey_sum += prices[k];
+        k = k + 1;
+    }
+    println!("thirty sum: {}", thirty_sum);
+    println!("nintey sum: {}", nintey_sum);
+    
+    let thirty_day_average: f32 = thirty_sum / 30.0;
+    let nintey_day_average: f32 = nintey_sum / 90.0;
+    println!("thirty day average: {}", thirty_day_average);
+    println!("nintey day average: {}", nintey_day_average);
+    
+    if thirty_day_average <= nintey_day_average{
+        return true;
+    } else {
+        return false;
+    }
+}
+/*
+fn update_price_history(prices: &mut Vec<f32>, recent_price: f32){
+    prices.remove(0);
+    prices.push(recent_price);
+}
+*/
 // use std::collections::HashMap
 fn fetch(equity: &str) -> std::result::Result<Vec<f32>, reqwest::Error> {
     let client = Client::new();
@@ -49,14 +97,13 @@ fn fetch(equity: &str) -> std::result::Result<Vec<f32>, reqwest::Error> {
                 let cur_stock = x.1.as_object().unwrap();
                 let open = cur_stock["1. open"].as_str().unwrap();
                 let x = f32::from_str(open).unwrap();
-               println!("{:?}", x);
+              // println!("{:?}", x);
                 stocks.push(x);
                 index = index + 1;
                 }
                 index = index + 1;
             }
-            println!("{:?}", get_most_recent_price(&mut stocks));
-            println!("{:?}", stocks.len());
+           // println!("{:?}", stocks.len());
             return stocks;
         })
         .map_err(|err| {
@@ -64,8 +111,7 @@ fn fetch(equity: &str) -> std::result::Result<Vec<f32>, reqwest::Error> {
             return err;
         })
 }
-
-fn main() {
+fn main() {    
     let args: Vec<String> = env::args().collect();
     if args.len() != 2 {
         println!("Please provide the equity of your choosing. Need 1 arg");
@@ -75,7 +121,22 @@ fn main() {
     println!("{:?}", query);
  let x = fetch(query);
 match x {
-    Ok(v) => println!("{:?}", v.len()),
+    Ok(res) => {
+    let mut tmp_prices = res; 
+    loop{
+let duration = time::Duration::from_secs(60);
+thread::sleep(duration);
+
+let recent_price = get_most_recent_price(query);
+tmp_prices.remove(0);
+tmp_prices.push(recent_price);
+if k_means(&mut tmp_prices) {
+    println!("Buy!");
+ } else {
+    print!("Don’t buy!");
+ }
+}
+    },
     Err(e) => println!("error parsing header: {:?}", e),
 }
 }
