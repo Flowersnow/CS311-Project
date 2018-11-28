@@ -2,4 +2,10 @@
 
 Repo for CPSC 311 Term Project
 
-Refer to https://docs.rs/reqwest/0.9.5/reqwest/ and https://github.com/seanmonstar/reqwest for HTTP Rust Client. Most of the code/setup is borrowed from there. Added new file sync-stock.rs, which is a synchronous call using the API from https://www.alphavantage.co/documentation/. Currently using Intraday with interval 1min.
+Requirements:
+To install Rust refer to Rust’s official installation documentations,https://www.rust-lang.org/en-US/install.html. Our source code currently has only been tested on Windows, other platforms may behave unexpectedly.
+
+To run the application, go to the base directory of the project and run the command "cargo run "<equity>" " where equity is a stock symbol from the list of exchanges NASDAQ, NYSE, AMEX. You can find equities following this link, https://www.nasdaq.com/screening/company-list.aspx.
+
+Refer to https://docs.rs/reqwest/0.9.5/reqwest/ and https://github.com/seanmonstar/reqwest for HTTP Rust Client. Most of the code/setup for the fetch function is borrowed from there. 
+The Stock Time Series Data API fromAlpha Vantage (https://www.alphavantage.co/documentation/) offers real time stock series data derived from the current trading day. We will be using the intraday time series option with one minute intervals to gather the last 90 data points of a certain equity.
