@@ -3,7 +3,7 @@
 Repo for CPSC 311 Term Project
 
 Requirements:
-To install Rust refer to Rust’s official installation documentations,https://www.rust-lang.org/en-US/install.html. Our source code currently has only been tested on Windows, other platforms may behave unexpectedly.
+To install Rust refer to Rust’s official installation [documentations](https://www.rust-lang.org/en-US/install.html). Our source code currently has only been tested on Windows, other platforms may behave unexpectedly.
 
 To run the application, go to the base directory of the project and run the command `cargo run <equity>` where equity is a stock symbol from the list of exchanges NASDAQ, NYSE, AMEX. You can find equities following this [link](https://www.nasdaq.com/screening/company-list.aspx).
 
