@@ -1,8 +1,10 @@
 # CS311-Project
 
-Repo for CPSC 311 Term Project
+**Intro**:
 
-Requirements:
+A stock trading application that retrieves real time stock prices of a particular equity to determine whether or not to buy or sell the stock. The program uses [AlphaVantage Intraday API](https://www.alphavantage.co/documentation/) to retrieve live stock information and utilizes the [mean reversion model](https://medium.com/the-ocean-trade/algorithmic-trading-101-lesson-2-data-strategy-design-and-mean-reversion-25c19a003328) to determine the buy or sell signal. This program is valuable as it will benefit trading firms by strengthening their decision to either buy or sell a particular stock.
+
+**Requirements**:
 To install Rust refer to Rust’s official installation [documentations](https://www.rust-lang.org/en-US/install.html). Our source code currently has only been tested on Windows, other platforms may behave unexpectedly.
 
 To run the application, go to the base directory of the project and run the command `cargo run <equity>` where equity is a stock symbol from the list of exchanges NASDAQ, NYSE, AMEX. You can find equities following this [link](https://www.nasdaq.com/screening/company-list.aspx).
