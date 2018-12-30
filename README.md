@@ -2,13 +2,13 @@
 
 **Documentation**:
 
-* [Proposal](docs/project-proposal)
+* [Proposal](docs/project-proposal.pdf)
 
-* [Background Report](docs/project-background-report)
+* [Background Report](docs/project-background-report.pdf)
 
-* [Plan-Proof](docs/project-plan-proof)
+* [Plan-Proof](docs/project-plan-proof.pdf)
 
-* [Final](docs/project-final)
+* [Final](docs/project-final.pdf)
 
 **Intro**:
 
