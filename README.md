@@ -15,6 +15,7 @@
 A stock trading application that retrieves real time stock prices of an equity to determine a buy or sell signal. The program uses [AlphaVantage Intraday API](https://www.alphavantage.co/documentation/) to retrieve live stock information and utilizes the [mean reversion model](https://medium.com/the-ocean-trade/algorithmic-trading-101-lesson-2-data-strategy-design-and-mean-reversion-25c19a003328) to determine the signal type. This program is valuable as it will benefit trading firms by strengthening their decision to either buy or sell a stock. A demo of the program can be seen [here](https://asciinema.org/a/tL9bJOQDuexR2ToCrATZnwz0Z?fbclid=IwAR3tpTXJllDCqyDCxJvvwdy9gi9XPgQHIMdxOYvLnQaORG43XxaPWxOJ5hE).
 
 **Requirements**:
+
 To install Rust refer to Rust’s official installation [documentations](https://www.rust-lang.org/en-US/install.html). Our source code currently has only been tested on Windows, other platforms may behave unexpectedly.
 
 To run the application, go to the base directory of the project and run the command `cargo run <equity>` where equity is a stock symbol from the list of exchanges NASDAQ, NYSE, AMEX. You can find equities following this [link](https://www.nasdaq.com/screening/company-list.aspx).
