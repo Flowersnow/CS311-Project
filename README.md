@@ -1,4 +1,4 @@
-# CS311-Project
+# The Algos of Wall Street: CS311-Project
 
 **Documentation**:
 
