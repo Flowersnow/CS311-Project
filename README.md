@@ -12,7 +12,7 @@
 
 **Intro**:
 
-A stock trading application that retrieves real time stock prices of an equity to determine a buy or sell signal. The program uses [AlphaVantage Intraday API](https://www.alphavantage.co/documentation/) to retrieve live stock information and utilizes the [mean reversion model](https://medium.com/the-ocean-trade/algorithmic-trading-101-lesson-2-data-strategy-design-and-mean-reversion-25c19a003328) to determine the signal type. This program is valuable as it will benefit trading firms by strengthening their decision to either buy or sell a stock. A demo of the program can be seen.
+A stock trading application that retrieves real time stock prices of an equity to determine a buy or sell signal. The program uses [AlphaVantage Intraday API](https://www.alphavantage.co/documentation/) to retrieve live stock information and utilizes the [mean reversion model](https://medium.com/the-ocean-trade/algorithmic-trading-101-lesson-2-data-strategy-design-and-mean-reversion-25c19a003328) to determine the signal type. This program is valuable as it will benefit trading firms by strengthening their decision to either buy or sell a stock. A demo of the program can be seen below.
 
 [![algos gif](docs/demo.svg)](https://asciinema.org/a/pG0yXK0V9XEdHym1s7VowsquF?autoplay=1)
 
