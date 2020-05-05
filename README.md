@@ -1,4 +1,4 @@
-![alt text](algos-of-wallstreet.jpg)
+![alt](algos-of-wallstreet.jpg)
 
 # The Algos of Wall Street: CS311-Project
 
